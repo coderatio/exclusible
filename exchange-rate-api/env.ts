@@ -21,4 +21,15 @@ export default Env.rules({
   APP_NAME: Env.schema.string(),
   DRIVE_DISK: Env.schema.enum(['local'] as const),
   NODE_ENV: Env.schema.enum(['development', 'production', 'test'] as const),
+
+  // REDIS
+  REDIS_CONNECTION: Env.schema.enum(['local'] as const),
+  REDIS_HOST: Env.schema.string(),
+  REDIS_PORT: Env.schema.number(),
+  REDIS_PASSWORD: Env.schema.string.optional(),
+
+  // KRAKEN
+  KRAKEN_API_KEY: Env.schema.string(),
+  KRAKEN_API_SECRET: Env.schema.string(),
+  KRAKEN_TIMEOUT: Env.schema.number.optional(),
 })
