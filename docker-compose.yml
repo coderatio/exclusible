@@ -3,13 +3,14 @@ version: '3.8'
 services:
   redis:
     image: redis:7-alpine
+    container_name: x-redis
     restart: always
-    hostname: x_redis
+    hostname: x_redis_host
     ports:
       - '6379:6379'
     command: redis-server --save 20 1 --loglevel warning
     volumes:
-      - x_redis:/data
+      - ./.x_redis_data:/data
 
   exchange-rate-service:
     container_name: exchange-rate-service

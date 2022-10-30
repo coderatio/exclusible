@@ -1,22 +1,32 @@
 import { Kraken } from 'node-kraken-api'
-import { x } from 'Config/x'
+import { availablePairs, x } from 'Config/x'
+import Redis from '@ioc:Adonis/Addons/Redis'
+import Logger from '@ioc:Adonis/Core/Logger'
 
 export default class KrakenService {
-  public static async tick() {
+  public static async run(): Promise<void> {
     const instance = this.init()
 
     await instance.ws
       .ticker()
       .on('update', async (payload: Kraken.WS.Ticker, pair: string) => {
-        console.log(payload)
-
-        console.log(`Received new rates for ${pair.replace('XBT', 'BTC')}`)
+        await KrakenService.toRedisPubSub(payload, pair)
       })
-      .on('error', (error, pair) => console.log({ error, pair }))
-      .subscribe('XBT/USD')
+      .on('error', (error, pair) => Logger.error('Kraken Error:', { error, pair }))
+      .subscribe(...availablePairs)
   }
 
-  private static init(options?: object) {
+  private static async toRedisPubSub(payload: Kraken.WS.Ticker, pair: string): Promise<void> {
+    await Redis.publish(
+      x.redis.rates_channel,
+      JSON.stringify({
+        payload,
+        pair,
+      })
+    )
+  }
+
+  private static init(options?: object): Kraken {
     return new Kraken({
       /** REST API key. */
       key: x.kraken.api_key,

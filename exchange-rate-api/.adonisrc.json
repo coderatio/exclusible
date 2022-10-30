@@ -20,6 +20,12 @@
       "environment": [
         "web"
       ]
+    },
+    {
+      "file": "./start/redis",
+      "environment": [
+        "web"
+      ]
     }
   ],
   "providers": [

@@ -9,4 +9,4 @@
 */
 
 import KrakenService from 'App/Services/kraken.service'
-;(async () => await KrakenService.tick())()
+KrakenService.run().catch((error) => console.log('Kraken Service Error', error))

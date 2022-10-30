@@ -27,9 +27,11 @@ export default Env.rules({
   REDIS_HOST: Env.schema.string(),
   REDIS_PORT: Env.schema.number(),
   REDIS_PASSWORD: Env.schema.string.optional(),
+  REDIS_RATE_CHANNEL: Env.schema.string(),
 
   // KRAKEN
   KRAKEN_API_KEY: Env.schema.string(),
   KRAKEN_API_SECRET: Env.schema.string(),
   KRAKEN_TIMEOUT: Env.schema.number.optional(),
+  AVAILABLE_PAIRS: Env.schema.string(),
 })
