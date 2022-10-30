@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7-alpine
+    restart: always
+    hostname: x_redis
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - x_redis:/data
+
+  exchange-rate-service:
+    container_name: exchange-rate-service
+    restart: always
+    build:
+      context: ./exchange-rate-api
+      dockerfile: Dockerfile
+      target: development
+    ports:
+      - "3333:3333"
+      - "9229:9229"
+    env_file:
+      - ./exchange-rate-api/.env
+    volumes:
+      - ./exchange-rate-api:/home/node/app
+      - /home/node/app/node_modules
+    command: dumb-init node ace serve --watch --node-args="--inspect=0.0.0.0"
+    depends_on:
+      - redis
+
+volumes:
+  x_redis:
+    driver: local
