@@ -18,7 +18,7 @@ export default class KrakenService {
 
   private static async toRedisPubSub(payload: Kraken.WS.Ticker, pair: string): Promise<void> {
     await Redis.publish(
-      x.redis.rates_channel,
+      x.redis.ratesChannel,
       JSON.stringify({
         payload,
         pair,
@@ -29,9 +29,9 @@ export default class KrakenService {
   private static init(options?: object): Kraken {
     return new Kraken({
       /** REST API key. */
-      key: x.kraken.api_key,
+      key: x.kraken.apiKey,
       /** REST API secret. */
-      secret: x.kraken.api_secret,
+      secret: x.kraken.apiSecret,
       /** Connection timeout (default 1000). */
       timeout: <number>(<unknown>x.kraken.timeout),
       ...options,
