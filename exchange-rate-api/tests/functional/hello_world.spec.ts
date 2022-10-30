@@ -1,8 +1,7 @@
-import { test } from '@japa/runner'
+import { describe, test, expect } from '@jest/globals'
 
-test('display welcome page', async ({ client }) => {
-  const response = await client.get('/')
-
-  response.assertStatus(200)
-  response.assertBodyContains({ hello: 'world' })
+describe('sum module', () => {
+  test('adds 1 + 2 to equal 3', () => {
+    expect(1 + 2).toBe(3)
+  })
 })

@@ -20,7 +20,7 @@ export default class KrakenService {
     await Redis.publish(
       x.redis.ratesChannel,
       JSON.stringify({
-        payload,
+        data: payload,
         pair,
       })
     )

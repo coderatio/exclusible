@@ -17,37 +17,28 @@
     "./start/kernel",
     {
       "file": "./start/kraken",
-      "environment": [
-        "web"
-      ]
+      "environment": ["web"]
     },
     {
       "file": "./start/redis",
-      "environment": [
-        "web"
-      ]
+      "environment": ["web"]
     }
   ],
-  "providers": [
-    "./providers/AppProvider",
-    "@adonisjs/core",
-    "@adonisjs/redis"
-  ],
-  "aceProviders": [
-    "@adonisjs/repl"
-  ],
+  "providers": ["./providers/AppProvider", "@adonisjs/core", "@adonisjs/redis"],
+  "aceProviders": ["@adonisjs/repl"],
   "tests": {
     "suites": [
       {
         "name": "functional",
-        "files": [
-          "tests/functional/**/*.spec(.ts|.js)"
-        ],
+        "files": ["tests/functional/**/*.spec(.ts|.js)"],
+        "timeout": 60000
+      },
+      {
+        "name": "unit",
+        "files": ["tests/unit/**/*.spec(.ts|.js)"],
         "timeout": 60000
       }
     ]
   },
-  "testProviders": [
-    "@japa/preset-adonis/TestsProvider"
-  ]
+  "testProviders": ["@japa/preset-adonis/TestsProvider"]
 }

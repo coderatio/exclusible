@@ -20,7 +20,7 @@ export default Env.rules({
   APP_KEY: Env.schema.string(),
   APP_NAME: Env.schema.string(),
   DRIVE_DISK: Env.schema.enum(['local'] as const),
-  NODE_ENV: Env.schema.enum(['development', 'production', 'test'] as const),
+  NODE_ENV: Env.schema.enum(['development', 'production', 'test', 'testing'] as const),
 
   // REDIS
   REDIS_CONNECTION: Env.schema.enum(['local'] as const),
