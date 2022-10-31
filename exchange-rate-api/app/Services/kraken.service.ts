@@ -26,7 +26,7 @@ export default class KrakenService {
     )
   }
 
-  private static init(options?: object): Kraken {
+  public static init(options?: object): Kraken {
     return new Kraken({
       /** REST API key. */
       key: x.kraken.apiKey,
