@@ -12,7 +12,7 @@ describe('Kraken Service', () => {
     expect(KrakenService.init).toBeCalledTimes(1)
   })
 
-  it('should established websocket connection', function () {
+  it('should establish a websocket connection', function () {
     const sampleConfig = {
       timeout: 1000,
       ws: { priv: { hostname: 'ws-auth.kraken.com' }, pub: { hostname: 'ws.kraken.com' } },

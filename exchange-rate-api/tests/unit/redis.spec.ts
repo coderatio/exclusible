@@ -1,41 +1,49 @@
-import { beforeAll, describe, expect, it } from '@jest/globals'
+import { beforeAll, describe, expect, it, afterEach } from '@jest/globals'
 import Redis from '@ioc:Adonis/Addons/Redis'
-import Env from '@ioc:Adonis/Core/Env'
 
 describe('Redis Driver', () => {
-  let client
-  let message
-  let channel
+  let message: string
+  let channel: string
+  let RedisMock
 
-  beforeAll(() => {
-    const redis = require('redis-mock')
-    client = redis.createClient(6379, Env.get('REDIS_HOST'))
+  beforeAll(async () => {
+    RedisMock = require('ioredis')
 
-    message = 'I was published'
-    channel = 'my_channel'
+    message = `I'm a published message`
+    channel = `my-channel-${1 + Math.round(Math.random())}`
   })
 
-  it('should be defined', () => {
+  afterEach((done) => {
+    new RedisMock().flushall().then(() => done())
+  })
+
+  it('should have driver installed and defined', () => {
     expect(Redis).toBeDefined()
-    expect(client).toBeDefined()
+    expect(RedisMock).toBeDefined()
   })
 
-  it('should establish successful connection', () => {
-    client.on('connect', (error) => expect(error).toBeUndefined())
+  it('should establish a successful connection', async () => {
+    const redis = new RedisMock()
+    await redis.set('foo', 'bar')
+
+    expect(await redis.get('foo')).toBe('bar')
   })
 
   it('should publish to a channel', async () => {
-    await client.publish(channel, message, (error) => {
-      expect(error).toBeUndefined()
-    })
+    const redis = new RedisMock()
+    redis.publish(channel, message, (error) => expect(error).toBeNull())
   })
 
   it('should subscribe to a channel', async () => {
-    const subscriber = client.duplicate()
-    subscriber.on('connect', (error) => expect(error).toBeUndefined())
+    const redisPub = new RedisMock()
+    const redisSub = new RedisMock()
 
-    await subscriber.subscribe(channel, (result: string) => {
-      expect(result).toEqual(message)
+    redisSub.on('message', (ch, msg) => {
+      expect(ch).toBe(channel)
+      expect(msg).toBe(message)
     })
+
+    redisSub.subscribe(channel)
+    redisPub.publish(channel, message)
   })
 })
