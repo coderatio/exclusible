@@ -1,0 +1,1 @@
+{"healthy":true,"report":{"env":{"displayName":"Node Env Check","health":{"healthy":true}},"appKey":{"displayName":"App Key Check","health":{"healthy":true}},"redis":{"displayName":"Redis","health":{"healthy":true,"message":"All connections are healthy"},"meta":[{"connection":"local","status":"ready","used_memory":"1.03M","error":null}]}}}
