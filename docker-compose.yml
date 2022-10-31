@@ -1,6 +1,18 @@
 version: '3.8'
 
 services:
+  mysql:
+    image: mysql:latest
+    container_name: x-mysql
+    restart: always
+    hostname: x_mysql_host
+    ports:
+      - "33061:3306"
+    volumes:
+      - x_mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "#081Root"
+
   redis:
     image: redis:7-alpine
     container_name: x-redis
@@ -10,7 +22,7 @@ services:
       - '6379:6379'
     command: redis-server --save 20 1 --loglevel warning
     volumes:
-      - ./.x_redis_data:/data
+      - x_redis_data:/data
 
   exchange-rate-service:
     container_name: exchange-rate-service
@@ -31,6 +43,27 @@ services:
     depends_on:
       - redis
 
+  user-api-service:
+    container_name: user-api-service
+    restart: always
+    build:
+      context: ./user-api
+      dockerfile: Dockerfile
+      target: development
+    ports:
+      - "3334:3334"
+      - "9228:9229"
+    env_file:
+      - ./user-api/.env
+    volumes:
+      - ./user-api:/home/node/app
+      - /home/node/app/node_modules
+    command: dumb-init node ace serve --watch --node-args="--inspect=0.0.0.0"
+    depends_on:
+      - redis
+      - mysql
+
 volumes:
-  x_redis:
+  x_redis_data:
     driver: local
+  x_mysql_data:
