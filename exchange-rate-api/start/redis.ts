@@ -7,7 +7,7 @@
 | boot.
 |
 */
-import Redis from '@ioc:Adonis/Addons/Redis'
+/*import Redis from '@ioc:Adonis/Addons/Redis'
 import { x } from 'Config/x'
 import { KrakenPayload } from '@ioc:X/Core/Config'
 
@@ -22,4 +22,4 @@ Redis.subscribe(x.redis.ratesChannel, (result: string) => {
       'BTC'
     )} at ${date.toUTCString()}`
   )
-})
+})*/
