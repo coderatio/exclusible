@@ -4,8 +4,8 @@ const request = require('supertest')
 
 const baseUrl = `http://${Env.get('HOST')}:${Env.get('PORT')}`
 
-describe('Homepage', () => {
-  it('display welcome page', async () => {
+describe('Given the base endpoint is needed', () => {
+  it('should display welcome page', () => {
     request(baseUrl).get('/').expect(200, { service: 'User Api' })
   })
 })
