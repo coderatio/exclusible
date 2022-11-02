@@ -43,14 +43,14 @@ describe('Given that registration is required', () => {
 
   it('should create salt and password correctly', async () => {
     userFactory.create().then(async (user: User) => {
-      const dbUser: User = await Database.connection(TestSuit.getConnection())
+      const dbUser: any = await Database.connection(TestSuit.getConnection())
         .from(User.table)
         .where('email', user.email)
         .first()
 
       expect(user.passwordSalt).toBeDefined()
-      expect(user.passwordSalt.length).toBe(16)
-      expect(user.passwordSalt).toBe(dbUser.passwordSalt)
+      expect(user.passwordSalt.length).toBe(32)
+      expect(user.passwordSalt).toBe(dbUser.password_salt)
       expect(user.password).toBeDefined()
       expect(user.password.startsWith('$argon2id')).toBeTruthy()
     })
