@@ -3,15 +3,15 @@ import * as fs from 'fs'
 import Database, { SqliteConfig } from '@ioc:Adonis/Lucid/Database'
 import Migrator from '@ioc:Adonis/Lucid/Migrator'
 
-const dbName = 'test.sqlite3'
-const dbPath = Application.makePath(`tests/${dbName}`)
+const dbName = String(process.env.TEST_DB)
+export const testDbPath = Application.makePath(dbName)
 
-const connection: string = 'test_connection'
+const connection: string = String(process.env.DB_CONNECTION)
 
 export const testDbConfig: SqliteConfig = {
   client: 'sqlite',
   connection: {
-    filename: dbPath,
+    filename: testDbPath,
   },
   migrations: {
     naturalSort: true,
@@ -41,9 +41,11 @@ export class TestSuit {
   public static async cleanUpDatabase(options?: CleanDBOptions) {
     await Database.manager.close(connection)
 
-    if (options?.drop) {
-      this.drop()
+    if (!options?.drop) {
+      return
     }
+
+    this.drop()
   }
 
   public static getConnection(): string {
@@ -51,10 +53,10 @@ export class TestSuit {
   }
 
   private static create(): void {
-    fs.open(dbPath, 'w', () => {})
+    fs.open(testDbPath, 'w', () => {})
   }
 
   private static drop(): void {
-    fs.unlink(dbPath, () => {})
+    fs.unlink(testDbPath, () => {})
   }
 }

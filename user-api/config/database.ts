@@ -52,13 +52,14 @@ const databaseConfig: DatabaseConfig = {
       healthCheck: true,
       debug: false,
     },
-    sqlite: {
+    test: {
       client: 'sqlite',
       connection: {
-        filename: Application.tmpPath('db.sqlite3'),
+        filename: Application.makePath(String(process.env.TEST_DB)),
       },
       migrations: {
         naturalSort: true,
+        paths: ['./database/migrations'],
       },
       useNullAsDefault: true,
       healthCheck: false,

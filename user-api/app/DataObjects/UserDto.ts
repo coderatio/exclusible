@@ -1,9 +1,9 @@
-import { Role } from 'App/Models/User'
+import { DateTime } from 'luxon'
 
 export default class UserDto {
   public firstName: string
   public lastName: string
-  public role: Role
   public email: string
-  public emailVerifiedAt?: Date
+  public emailVerifiedAt?: DateTime
+  public createdAt?: DateTime
 }

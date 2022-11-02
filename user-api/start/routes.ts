@@ -23,3 +23,4 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.get('/', async () => {
   return { service: 'User Api' }
 })
+Route.post('/register', 'UsersController.register').as('register')

@@ -1,11 +1,10 @@
-import { it, describe } from '@jest/globals'
-import Env from '@ioc:Adonis/Core/Env'
-const request = require('supertest')
+import { test } from '@japa/runner'
 
-const baseUrl = `http://${Env.get('HOST')}:${Env.get('PORT')}`
+test.group('Given the base endpoint is needed', () => {
+  test('should display welcome page', async ({ client }) => {
+    const response = await client.get('/')
 
-describe('Given the base endpoint is needed', () => {
-  it('should display welcome page', () => {
-    request(baseUrl).get('/').expect(200, { service: 'User Api' })
+    response.assertStatus(200)
+    response.assertBody({ service: 'User Api' })
   })
 })
