@@ -1,6 +1,6 @@
 import UserDto from 'App/DataObjects/UserDto'
 import User from 'App/Models/User'
-import Response from 'App/Supports/ResponseComposer'
+import Response from 'App/Supports/Response'
 
 export default class {
   public static async register(response, userDto: UserDto) {

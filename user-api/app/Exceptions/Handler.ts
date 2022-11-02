@@ -15,7 +15,7 @@
 
 import Logger from '@ioc:Adonis/Core/Logger'
 import HttpExceptionHandler from '@ioc:Adonis/Core/HttpExceptionHandler'
-import ResponseComposer from 'App/Supports/ResponseComposer'
+import Response from 'App/Supports/Response'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class ExceptionHandler extends HttpExceptionHandler {
@@ -24,7 +24,7 @@ export default class ExceptionHandler extends HttpExceptionHandler {
   }
 
   public async handle(error: any, ctx: HttpContextContract) {
-    const response = new ResponseComposer(ctx.response)
+    const response = new Response(ctx.response)
     if (error.code === 'E_VALIDATION_FAILURE') {
       return response.validationError(error.messages.errors)
     }
