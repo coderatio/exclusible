@@ -84,6 +84,11 @@ should be able to communicate effectively with each other. Here are the services
     The documentation for all API endpoints are found on the link below:
     [https://documenter.getpostman.com/view/6955209/2s8YY9vmW9](https://documenter.getpostman.com/view/6955209/2s8YY9vmW9)
 
+3. **Collection**
+   
+   Find link to the postman collection for all endpoints below:
+
+   [Exclusible Postman Collection](https://speeding-water-9901.postman.co/workspace/My-Workspace~0606ae7e-d708-4487-8d3b-046b2d7b854e/collection/6955209-92da7511-f31e-46a8-ad5d-ff32c883d342?action=share&creator=6955209)
 ### Websocket
 The websocket server is accessible on the link below:
 ```shell
