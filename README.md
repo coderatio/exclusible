@@ -1,4 +1,4 @@
-[# Exclusible Project
+# Exclusible Project
 This project is a simple microservice architecture with two services(exchange rate and user api).
 The services communicate through a message broker like Redis PubSub.
 
@@ -6,23 +6,24 @@ The services communicate through a message broker like Redis PubSub.
 ![Architecture Diagram](https://i.imgur.com/erkLB4k.png)
 
 ### Problem
-When building solutions, it's good to understand the underlying problem. 
-This understanding helps in building resilient and effective solutions
-that's easy to use, maintain and scale.
+When building software solutions, it's good to understand the underlying problem. 
+This understanding enable us to build resilient and effective applications
+that are easy to use, maintain and scale.
 
-For this task, I see a problem with administrators of a system finding it
-difficult to update rates and let this change be shown to users immediately.
-I also see a rigid existing way of updating rates on a system, and it needs to be better.
+For this technical task, I see a problem with administrators of a system finding it
+difficult to update rates and let user be aware of these changes in realtime.
+I also see an existing pattern of updating rates on a system that needs to be better.
 
 ### Solution
+For a task like, I'm tasked with the responsibility to provide a solution. And here are a few steps I'm taking.
 - Service that stream live rates from CoinmarketCap or Kraken Exchange
-- A service that shares these rates with another users where user data is stored
+- A service that shares these rates with another services where users' information are stored
 - A service that gets notified of new rates
 - A service that provides an endpoint for admin to add spread to exchange rate
 - Websocket with subscription for Exchange rate on the FE (connecting to
 external API or websocket)
 
-Looking at the itemized solutions above, we could solve the assumped problems highlighted.
+These solutions are my assumptions and not what may seem!!
 
 ### Technologies
 For every problem given to an engineer, there will be tools needed to help them solve those problems.
@@ -110,7 +111,7 @@ As soon as the `user-api-service` is running, you can make websocket connection 
    All rates are broadcasted through the `rates:live` event.
 ### Misc
 I created a frontend page to demo rate streaming. You may access the page by visiting the link below. 
-You will need to change branch to `ws-client-test`
+Do not forget to check out to the `ws-client-test` branch.
 ```shell
 http://127.0.0.1:3334/ws-test/
 
