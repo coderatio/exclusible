@@ -1,10 +1,13 @@
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
+import RedisCacheService from 'App/Services/RedisCacheService'
 
 export default class AppProvider {
   constructor(protected app: ApplicationContract) {}
 
   public register() {
-    // Register your own bindings
+    this.app.container.singleton('X/Services/RedisCache', () => {
+      return new RedisCacheService()
+    })
   }
 
   public async boot() {

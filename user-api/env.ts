@@ -30,4 +30,11 @@ export default Env.rules({
   MYSQL_DB_NAME: Env.schema.string(),
 
   TOKEN_EXPIRED_AT: Env.schema.string(),
+
+  // REDIS
+  REDIS_CONNECTION: Env.schema.enum(['local'] as const),
+  REDIS_HOST: Env.schema.string(),
+  REDIS_PORT: Env.schema.number(),
+  REDIS_PASSWORD: Env.schema.string.optional(),
+  REDIS_RATE_CHANNEL: Env.schema.string(),
 })

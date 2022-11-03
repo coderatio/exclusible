@@ -10,7 +10,7 @@ export type Rates = {
 export default class UpdateRatesAction {
   public static async execute(request, response): Promise<object> {
     const validated = await this.validate(request)
-    let setting = await Setting.forRates()
+    const setting = await Setting.findBy('key', Setting.ratesKey)
 
     if (setting instanceof Setting) {
       setting.value = JSON.stringify(validated)
@@ -21,7 +21,7 @@ export default class UpdateRatesAction {
     }
 
     await Setting.create({
-      key: 'rates',
+      key: Setting.ratesKey,
       value: JSON.stringify(validated),
     })
 
