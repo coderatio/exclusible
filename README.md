@@ -102,7 +102,7 @@ As soon as the `user-api-service` is running, you can make websocket connection 
 ```
 2. **Websocket event**
   
-   All rates are broadcasted through the `rates:latest` event.
+   All rates are broadcasted through the `rates:live` event.
 ### Misc
 I created a frontend page to demo rate streaming. You may access the page by visiting the link below. 
 You will need to change branch to `ws-client-test`
