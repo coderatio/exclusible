@@ -1,6 +1,6 @@
 declare module '@ioc:X/Core/Config' {
   export type AuthConfig = {
-    expiredIn: string
+    expiresIn: string
   }
 
   type RedisConfig = {

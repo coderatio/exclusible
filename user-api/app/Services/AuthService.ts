@@ -19,7 +19,7 @@ export default class {
     }
 
     const token = await context.auth.use('api').generate(user, {
-      expiresIn: x.auth.expiredIn,
+      expiresIn: x.auth.expiresIn,
     })
 
     return new Response(context.response).success(`You're loggedin`, {

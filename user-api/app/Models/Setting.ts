@@ -45,7 +45,7 @@ export default class Setting extends BaseModel {
    * hit the database if we can't find from the cache
    * We also ensure we cache the rates afterwards
    *
-   * @return Promise<Setting | object | null>
+   * @return Promise<Rates  | null>
    */
   public static async forRates(): Promise<Rates | null> {
     const cachedValues = await RedisCacheService.get(this.ratesCacheKey)
