@@ -32,3 +32,5 @@ Route.delete('/logout', 'LogoutController').as('logout')
 Route.post('/settings/update-rates', 'SettingsController.updateRates')
   .middleware(['auth', 'onlyAdmin'])
   .as('settings.updateRates')
+
+import './web'
