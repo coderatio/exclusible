@@ -29,4 +29,6 @@ Route.post('login', 'LoginController').as('login')
 Route.delete('/logout', 'LogoutController').as('logout')
 
 // Rates - Admin Role
-Route.post('/settings/update-rates', 'SettingsController.updateRates').as('settings.updateRates')
+Route.post('/settings/update-rates', 'SettingsController.updateRates')
+  .middleware(['auth', 'onlyAdmin'])
+  .as('settings.updateRates')
