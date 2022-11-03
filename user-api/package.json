@@ -28,7 +28,7 @@
         2
       ],
       "prettier/prettier": [
-        "off"
+        "error"
       ],
       "linebreak-style": [
         "error",

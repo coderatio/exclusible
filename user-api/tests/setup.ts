@@ -21,7 +21,7 @@ export const testDbConfig: SqliteConfig = {
 }
 
 interface CleanDBOptions {
-  drop: boolean
+  drop: true | false
 }
 
 export class TestSuit {

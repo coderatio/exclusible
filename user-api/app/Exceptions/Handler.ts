@@ -29,7 +29,7 @@ export default class ExceptionHandler extends HttpExceptionHandler {
       return response.validationError(error.messages.errors)
     }
 
-    if (error.code === 'E_UNAUTHORIZED_ACCESS') {
+    if (error.code === 'E_UNAUTHORIZED_ACCESS' || error.code === 'E_INVALID_API_TOKEN') {
       return response.unauthorized('Unauthorized access')
     }
 
@@ -42,11 +42,9 @@ export default class ExceptionHandler extends HttpExceptionHandler {
 
     if (error.code === 'E_RUNTIME_EXCEPTION') {
       message = 'Put the blame on us. But try again later.'
-      err = { message: error.message }
+      err = { error: error.message }
     }
 
-    return response.create(error.status ?? 500, 'failed', message, {
-      error: err,
-    })
+    return response.create(error.status ?? 500, 'failed', message, err)
   }
 }
