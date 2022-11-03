@@ -8,9 +8,7 @@
     "start": "node server.js",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
-    "test": "jest --bail --verbose --silent",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage"
+    "test": "node ace test"
   },
   "eslintConfig": {
     "extends": [
@@ -35,7 +33,7 @@
         "unix"
       ],
       "quotes": [
-        "error",
+        "off",
         "single"
       ]
     }
