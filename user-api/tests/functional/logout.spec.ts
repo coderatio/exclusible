@@ -33,6 +33,6 @@ test.group('Given a user wants to logout', (group) => {
     const newRequest = client.delete('/logout')
     const newResponse = await newRequest.bearerToken(login.body().data.token.token)
     assert.equal(newResponse.body().state, 'failed')
-    assert.equal(newResponse.body().message, 'Unauthorized access')
+    assert.equal(newResponse.body().message, "You're not loggedin")
   })
 })
