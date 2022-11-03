@@ -11,6 +11,7 @@ import Redis from '@ioc:Adonis/Addons/Redis'
 import x from 'Config/x'
 import Setting from 'App/Models/Setting'
 import { Rates } from 'App/Actions/UpdateRatesAction'
+import WS from 'App/Services/WebSocketService'
 
 Redis.subscribe(x.redis.ratesChannel, async (result: string) => {
   if (!result) {
@@ -42,6 +43,8 @@ Redis.subscribe(x.redis.ratesChannel, async (result: string) => {
       currentSpread: ratesSetting ? ratesSetting : undefined,
     },
   }
+
+  WS.io.emit('rates:live', socketPayload)
 
   console.log(socketPayload)
 })
