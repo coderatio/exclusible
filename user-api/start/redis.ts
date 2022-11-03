@@ -13,6 +13,10 @@ import Setting from 'App/Models/Setting'
 import { Rates } from 'App/Actions/UpdateRatesAction'
 
 Redis.subscribe(x.redis.ratesChannel, async (result: string) => {
+  if (!result) {
+    return
+  }
+
   const payload = JSON.parse(result)
   const exchangeRate = parseInt(payload.data.a[0])
 
@@ -28,7 +32,16 @@ Redis.subscribe(x.redis.ratesChannel, async (result: string) => {
   }
 
   // Broadcast new rate to socket clients
-  console.log({
-    'BTC/USD': rates,
-  })
+  const socketPayload = {
+    BTC_USD: {
+      original: {
+        buy: exchangeRate,
+        sell: exchangeRate,
+      },
+      withSpread: rates,
+      currentSpread: ratesSetting ? ratesSetting : undefined,
+    },
+  }
+
+  console.log(socketPayload)
 })
