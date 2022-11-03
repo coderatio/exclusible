@@ -112,3 +112,4 @@ http://127.0.0.1:3334/ws-test/
 # Ensure you switch branch to "ws-client-test"
 
 ```
+![Websocket Test](https://i.imgur.com/39J3CKW.png)
